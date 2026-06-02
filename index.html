@@ -3,42 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدائح المصطفى ﷺ - موسوعة القصائد النبوية</title>
-    
+    <title>مدائح المصطفى ﷺ</title>
     <link rel="stylesheet" href="style.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="main-container">
-        
-        <section id="main-menu" class="page-section">
-            <div class="header-box">
+    <div class="app-wrapper">
+        <div id="main-menu" class="section">
+            <header>
                 <h1>مدائح المصطفى ﷺ</h1>
-                <p>مجموعة من أجمل القصائد والمدائح النبوية الشريفة</p>
-                <div class="separator-line"></div>
-            </div>
+                <p>مجموعة من أجمل القصائد النبوية</p>
+                <div class="divider"></div>
+            </header>
+            <nav id="poem-list" class="poem-list"></nav>
+        </div>
 
-            <div class="list-wrapper">
-                <button class="poem-btn" onclick="openPoem('البردة')">قصيدة البردة الشريفة</button>
-                <button class="poem-btn" onclick="openPoem('نهج_البردة')">قصيدة نهج البردة</button>
-                <button class="poem-btn" onclick="openPoem('يا_إمام_الرسل')">يا إمام الرسل</button>
-                <button class="poem-btn" onclick="openPoem('قمر_سيدنا_النبي')">قمرٌ سيدنا النبي</button>
-            </div>
-        </section>
-
-        <section id="poem-view" class="page-section hidden">
-            <div class="content-header">
-                <button class="back-button" onclick="returnToMenu()">← العودة للقائمة الرئيسية</button>
-                <h2 id="display-title"></h2>
-            </div>
-            
-            <div class="text-box">
-                <p id="display-content"></p>
-            </div>
-        </section>
-
+        <div id="poem-view" class="section hidden">
+            <button class="back-btn" onclick="goBack()">← العودة للقائمة</button>
+            <h2 id="poem-title"></h2>
+            <div id="poem-content" class="poem-text"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>
