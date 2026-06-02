@@ -83,3 +83,4 @@ backBtn.addEventListener('click', () => {
 
 // تشغيل الدالة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', loadPoemsList);
+<script src="script.js?v=2"></script>
