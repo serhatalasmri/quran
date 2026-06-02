@@ -3,7 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -12,87 +12,99 @@ body {
 }
 
 .app-container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
     width: 90%;
     max-width: 600px;
-    padding: 30px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    text-align: center;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    min-height: 550px;
 }
 
 header h1 {
     margin: 0;
-    font-size: 2.5rem;
-    color: #ffd700;
+    font-size: 2.2rem;
+    color: #dfb76c;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 header p {
     font-size: 0.9rem;
-    opacity: 0.8;
+    opacity: 0.7;
+    margin-bottom: 25px;
 }
 
-.selector-container {
-    margin: 25px 0;
+/* مصفوفة القصائد تحت بعض */
+.poems-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 450px;
+    overflow-y: auto;
+    padding-left: 5px;
 }
 
-select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    font-size: 1.1rem;
-    outline: none;
-    cursor: pointer;
-}
-
-select option {
-    background: #1e3c72;
-    color: #fff;
-}
-
-.audio-player {
-    margin: 20px 0;
-}
-
-audio {
-    width: 100%;
-}
-
-.surah-container {
-    background: rgba(255, 255, 255, 0.95);
-    color: #222;
-    padding: 25px;
+.poem-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 18px;
     border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: right;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.poem-item:hover, .poem-item:active {
+    background: rgba(223, 183, 108, 0.2);
+    border-color: #dfb76c;
+    transform: translateY(-2px);
+}
+
+/* شاشة عرض القصيدة */
+.hidden {
+    display: none;
+}
+
+#back-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    float: right;
+    transition: background 0.2s;
+}
+
+#back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#poem-title {
+    color: #dfb76c;
+    margin-top: 10px;
+    font-size: 1.8rem;
+    clear: both;
+}
+
+.poem-content {
+    background: rgba(255, 255, 255, 0.95);
+    color: #1a252f;
+    padding: 25px;
+    border-radius: 20px;
     max-height: 400px;
     overflow-y: auto;
-    text-align: justify;
-    line-height: 2.2;
-    font-size: 1.4rem;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-}
-
-.placeholder-text {
-    color: #777;
     text-align: center;
-    font-size: 1.1rem;
-}
-
-.ayah {
-    display: inline;
-}
-
-.ayah-num {
-    color: #2a5298;
+    line-height: 2.5;
+    font-size: 1.3rem;
+    white-space: pre-line; /* للحفاظ على نزول الأسطر البيات */
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
     font-weight: bold;
-    font-size: 1rem;
-    margin: 0 5px;
-    border: 1px solid #2a5298;
-    border-radius: 50%;
-    padding: 2px 6px;
-}   
+}
