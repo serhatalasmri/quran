@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق القرآن الكريم</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('تم تفعيل خدمة التطبيق بنجاح!'))
+      .catch(err => console.log('فشل التفعيل:', err));
+  }
+</script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>القرآن الكريم</h1>
+            <p>قراءة واستماع بلمسة عصرية</p>
+        </header>
+
+        <main>
+            <div class="selector-container">
+                <label for="surah-select">اختر السورة:</label>
+                <select id="surah-select">
+                    <option value="">جاري تحميل السور...</option>
+                </select>
+            </div>
+
+            <div class="audio-player">
+                <audio id="quran-audio" controls></audio>
+            </div>
+
+            <div class="surah-container" id="surah-text">
+                <p class="placeholder-text">الرجاء اختيار سورة لبدء القراءة والاستماع</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
