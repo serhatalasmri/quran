@@ -7,24 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="app-wrapper">
-        <div id="main-menu" class="section">
-            <header>
-                <h1>مدائح المصطفى ﷺ</h1>
-                <p>مجموعة من أجمل القصائد النبوية</p>
-                <div class="divider"></div>
-            </header>
-            <nav id="poem-list" class="poem-list"></nav>
+    <div id="app-container">
+        <div id="main-menu">
+            <h1>مدائح المصطفى ﷺ</h1>
+            <div id="poem-list">
+                </div>
         </div>
 
-        <div id="poem-view" class="section hidden">
-            <button class="back-btn" onclick="goBack()">← العودة للقائمة</button>
+        <div id="poem-view" class="hidden">
             <h2 id="poem-title"></h2>
-            <div id="poem-content" class="poem-text"></div>
+            <p id="poem-content"></p>
+            <button onclick="goBack()" class="back-btn">← عودة للقائمة</button>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
