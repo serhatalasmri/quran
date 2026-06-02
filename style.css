@@ -1,24 +1,21 @@
 const poems = [
-    { title: "قصيدة البردة الشريفة", content: "مولاي صلِّ وسلم دائماً أبداً... [نص القصيدة هنا]" },
-    { title: "نهج البردة", content: "ريمٌ على القاعِ بين البانِ والعلمِ... [نص القصيدة هنا]" },
-    { title: "يا إمام الرسل", content: "يا إمامَ الرسلِ يا سندي... [نص القصيدة هنا]" },
-    { title: "قمرٌ سيدنا النبي", content: "قمرٌ قمرٌ قمرٌ سيدنا النبي... [نص القصيدة هنا]" }
-    // يمكنك إضافة أي عدد من القصائد هنا فقط بنفس التنسيق
+    { title: "البردة الشريفة", content: "مولاي صلِّ وسلم دائماً أبداً... (نص البردة)" },
+    { title: "نهج البردة", content: "ريمٌ على القاعِ بين البانِ والعلمِ... (نص نهج البردة)" }
 ];
 
-// إنشاء القائمة تلقائياً عند فتح التطبيق
-const listElement = document.getElementById('poem-list');
-poems.forEach((poem, index) => {
-    const btn = document.createElement('button');
-    btn.innerText = poem.title;
-    btn.onclick = () => loadPoem(index);
-    listElement.appendChild(btn);
+const listDiv = document.getElementById('poem-list');
+
+// إنشاء الأزرار
+poems.forEach((p, i) => {
+    let btn = document.createElement('button');
+    btn.innerText = p.title;
+    btn.onclick = () => showPoem(i);
+    listDiv.appendChild(btn);
 });
 
-function loadPoem(index) {
-    const poem = poems[index];
-    document.getElementById('poem-title').innerText = poem.title;
-    document.getElementById('poem-content').innerText = poem.content;
+function showPoem(i) {
+    document.getElementById('poem-title').innerText = poems[i].title;
+    document.getElementById('poem-content').innerText = poems[i].content;
     document.getElementById('main-menu').classList.add('hidden');
     document.getElementById('poem-view').classList.remove('hidden');
 }
