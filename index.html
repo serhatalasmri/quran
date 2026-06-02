@@ -3,24 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدائح المصطفى</title>
-    <link rel="stylesheet" href="style.css?v=2">
+    <title>مدائح المصطفى ﷺ - موسوعة القصائد النبوية</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="main-menu" class="container">
-        <h1>مدائح المصطفى ﷺ</h1>
-        <p>مجموعة من أجمل القصائد والمدائح النبوية</p>
-        <button onclick="showPoem('القصيدة الأولى: نهج البردة', 'أمن تذكر جيرانٍ بذي سلمِ...')">نهج البردة</button>
-        <button onclick="showPoem('القصيدة الثانية: البردة', 'مولاي صل وسلم دائماً أبداً...')">البردة</button>
+    <div class="main-container">
+        
+        <section id="main-menu" class="page-section">
+            <div class="header-box">
+                <h1>مدائح المصطفى ﷺ</h1>
+                <p>مجموعة من أجمل القصائد والمدائح النبوية الشريفة</p>
+                <div class="separator-line"></div>
+            </div>
+
+            <div class="list-wrapper">
+                <button class="poem-btn" onclick="openPoem('البردة')">قصيدة البردة الشريفة</button>
+                <button class="poem-btn" onclick="openPoem('نهج_البردة')">قصيدة نهج البردة</button>
+                <button class="poem-btn" onclick="openPoem('يا_إمام_الرسل')">يا إمام الرسل</button>
+                <button class="poem-btn" onclick="openPoem('قمر_سيدنا_النبي')">قمرٌ سيدنا النبي</button>
+            </div>
+        </section>
+
+        <section id="poem-view" class="page-section hidden">
+            <div class="content-header">
+                <button class="back-button" onclick="returnToMenu()">← العودة للقائمة الرئيسية</button>
+                <h2 id="display-title"></h2>
+            </div>
+            
+            <div class="text-box">
+                <p id="display-content"></p>
+            </div>
+        </section>
+
     </div>
 
-    <div id="poem-view" class="container hidden">
-        <h2 id="poem-title">اسم القصيدة</h2>
-        <p id="poem-content">نص القصيدة هنا</p>
-        <button onclick="hidePoem()">← عودة للقائمة</button>
-    </div>
-
-    <script src="script.js?v=2"></script>
+    <script src="script.js"></script>
 </body>
 </html>
