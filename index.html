@@ -3,66 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدائح نبوية</title>
-    <style>
-        /* التنسيق الأساسي */
-        body { background: #0b1c24; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 500px; text-align: center; }
-        h1 { color: #f1c40f; margin-bottom: 20px; }
-        
-        /* تصميم الأزرار */
-        .btn { display: block; width: 100%; padding: 18px; margin: 12px 0; border: none; border-radius: 12px; background: #2c3e50; color: #fff; font-size: 18px; cursor: pointer; border: 1px solid #f1c40f; }
-        .btn:hover { background: #f1c40f; color: #000; }
-        
-        /* تصميم شاشة القراءة */
-        .poem-box { background: #1a2f38; padding: 25px; border-radius: 15px; display: none; text-align: center; }
-        .poem-text { font-size: 20px; line-height: 2; margin: 20px 0; color: #ecf0f1; }
-        .back-btn { background: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
-    </style>
+    <title>مدائح المصطفى ﷺ - النسخة الاحترافية</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <div id="main-menu">
+    <div id="app-container" class="app-container">
+        
+        <header id="site-header">
             <h1>مدائح المصطفى ﷺ</h1>
-            <div id="btn-list"></div>
-        </div>
+            <p id="sub-header">موسوعة المدائح النبوية الشريفة</p>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="ابحث عن قصيدتك المفضلة..." aria-label="Search">
+            </div>
+        </header>
 
-        <div id="poem-display" class="poem-box">
-            <h2 id="poem-title" style="color: #f1c40f;"></h2>
-            <div id="poem-content" class="poem-text"></div>
-            <button class="back-btn" onclick="showMenu()">العودة للقائمة</button>
-        </div>
+        <main id="main-content">
+            <section id="poem-list-section">
+                <div id="poem-grid" class="poem-grid">
+                    </div>
+            </section>
+        </main>
+
+        <section id="reader-section" class="hidden">
+            <div class="reader-toolbar">
+                <button id="back-button" class="btn-primary">← العودة للقائمة</button>
+                <h2 id="current-title"></h2>
+            </div>
+            <div id="poem-display" class="poem-display-area">
+                </div>
+        </section>
+
+        <footer id="site-footer">
+            <p>جميع الحقوق محفوظة - مدائح المصطفى</p>
+        </footer>
     </div>
 
-    <script>
-        const library = [
-            { title: "البردة الشريفة", content: "ستت" },
-            { title: "نهج البردة", content: "ريمٌ على القاعِ بين البانِ والعلمِ... أحلَّ سفكَ دمي في الأشهرِ الحُرُمِ" },
-            { title: "يا إمام الرسل", content: "يا إمامَ الرسلِ يا سندي... أنت بعد الله معتمدي" }
-        ];
-
-        // بناء الأزرار تلقائياً
-        const list = document.getElementById('btn-list');
-        library.forEach((item, index) => {
-            let b = document.createElement('button');
-            b.className = 'btn';
-            b.innerText = item.title;
-            b.onclick = () => showPoem(index);
-            list.appendChild(b);
-        });
-
-        function showPoem(index) {
-            document.getElementById('main-menu').style.display = 'none';
-            document.getElementById('poem-display').style.display = 'block';
-            document.getElementById('poem-title').innerText = library[index].title;
-            document.getElementById('poem-content').innerText = library[index].content;
-        }
-
-        function showMenu() {
-            document.getElementById('main-menu').style.display = 'block';
-            document.getElementById('poem-display').style.display = 'none';
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
