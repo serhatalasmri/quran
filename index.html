@@ -3,64 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدائح المصطفى</title>
-<style>
-    body { background-color: #0f2027; font-family: Arial, sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
-    .card { width: 100%; max-width: 400px; background: #2c3e50; padding: 25px; border-radius: 20px; text-align: center; color: white; }
-    
-    /* لون العناوين */
-    h1, h2 { color: #ffffff; } 
-    
-    /* لون نص القصيدة */
-    #content { color: #f0f0f0; font-size: 18px; line-height: 1.8; }
-    
-    /* لون الأزرار */
-    button { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 10px; background: #3498db; color: white; font-weight: bold; cursor: pointer; }
-    
-    .hidden { display: none; }
-</style>
+    <title>مدائح نبوية</title>
+    <style>
+        /* التنسيق الأساسي */
+        body { background: #0b1c24; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 500px; text-align: center; }
+        h1 { color: #f1c40f; margin-bottom: 20px; }
+        
+        /* تصميم الأزرار */
+        .btn { display: block; width: 100%; padding: 18px; margin: 12px 0; border: none; border-radius: 12px; background: #2c3e50; color: #fff; font-size: 18px; cursor: pointer; border: 1px solid #f1c40f; }
+        .btn:hover { background: #f1c40f; color: #000; }
+        
+        /* تصميم شاشة القراءة */
+        .poem-box { background: #1a2f38; padding: 25px; border-radius: 15px; display: none; text-align: center; }
+        .poem-text { font-size: 20px; line-height: 2; margin: 20px 0; color: #ecf0f1; }
+        .back-btn { background: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
+    </style>
 </head>
 <body>
 
-    <div class="card">
-        <div id="menu">
+    <div class="container">
+        <div id="main-menu">
             <h1>مدائح المصطفى ﷺ</h1>
-            <div id="buttons"></div>
+            <div id="btn-list"></div>
         </div>
 
-        <div id="poem" class="hidden">
-            <h2 id="title"></h2>
-            <p id="content"></p>
-            <button onclick="hide()">← عودة للقائمة</button>
+        <div id="poem-display" class="poem-box">
+            <h2 id="poem-title" style="color: #f1c40f;"></h2>
+            <div id="poem-content" class="poem-text"></div>
+            <button class="back-btn" onclick="showMenu()">العودة للقائمة</button>
         </div>
     </div>
 
     <script>
-        // القصائد هنا
-        const data = [
-            { title: "البردة الشريفة", text: "مولاي صلِّ وسلم دائماً أبداً..." },
-            { title: "نهج البردة", text: "ريمٌ على القاعِ بين البانِ والعلمِ..." }
+        const library = [
+            { title: "البردة الشريفة", content: "مولاي صلِّ وسلم دائماً أبداً... على حبيبك خير الخلق كلهمُ" },
+            { title: "نهج البردة", content: "ريمٌ على القاعِ بين البانِ والعلمِ... أحلَّ سفكَ دمي في الأشهرِ الحُرُمِ" },
+            { title: "يا إمام الرسل", content: "يا إمامَ الرسلِ يا سندي... أنت بعد الله معتمدي" }
         ];
 
-        // إنشاء الأزرار تلقائياً
-        const btnContainer = document.getElementById('buttons');
-        data.forEach((p, i) => {
+        // بناء الأزرار تلقائياً
+        const list = document.getElementById('btn-list');
+        library.forEach((item, index) => {
             let b = document.createElement('button');
-            b.innerText = p.title;
-            b.onclick = () => show(i);
-            btnContainer.appendChild(b);
+            b.className = 'btn';
+            b.innerText = item.title;
+            b.onclick = () => showPoem(index);
+            list.appendChild(b);
         });
 
-        function show(i) {
-            document.getElementById('title').innerText = data[i].title;
-            document.getElementById('content').innerText = data[i].text;
-            document.getElementById('menu').classList.add('hidden');
-            document.getElementById('poem').classList.remove('hidden');
+        function showPoem(index) {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('poem-display').style.display = 'block';
+            document.getElementById('poem-title').innerText = library[index].title;
+            document.getElementById('poem-content').innerText = library[index].content;
         }
 
-        function hide() {
-            document.getElementById('menu').classList.remove('hidden');
-            document.getElementById('poem').classList.add('hidden');
+        function showMenu() {
+            document.getElementById('main-menu').style.display = 'block';
+            document.getElementById('poem-display').style.display = 'none';
         }
     </script>
 </body>
