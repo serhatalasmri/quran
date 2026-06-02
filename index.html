@@ -3,23 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدائح المصطفى ﷺ</title>
-    <link rel="stylesheet" href="style.css">
+    <title>مدائح المصطفى</title>
+    <style>
+        /* التنسيق المدمج هنا لضمان عدم حدوث تداخل */
+        body { background-color: #0f2027; color: white; font-family: Arial, sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .card { width: 100%; max-width: 400px; background: #2c3e50; padding: 25px; border-radius: 20px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        button { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 10px; background: #f1c40f; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .hidden { display: none; }
+        h1 { color: #f1c40f; }
+    </style>
 </head>
 <body>
-    <div id="app-container">
-        <div id="main-menu">
+
+    <div class="card">
+        <div id="menu">
             <h1>مدائح المصطفى ﷺ</h1>
-            <div id="poem-list">
-                </div>
+            <div id="buttons"></div>
         </div>
 
-        <div id="poem-view" class="hidden">
-            <h2 id="poem-title"></h2>
-            <p id="poem-content"></p>
-            <button onclick="goBack()" class="back-btn">← عودة للقائمة</button>
+        <div id="poem" class="hidden">
+            <h2 id="title"></h2>
+            <p id="content"></p>
+            <button onclick="hide()">← عودة للقائمة</button>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        // القصائد هنا
+        const data = [
+            { title: "البردة الشريفة", text: "مولاي صلِّ وسلم دائماً أبداً..." },
+            { title: "نهج البردة", text: "ريمٌ على القاعِ بين البانِ والعلمِ..." }
+        ];
+
+        // إنشاء الأزرار تلقائياً
+        const btnContainer = document.getElementById('buttons');
+        data.forEach((p, i) => {
+            let b = document.createElement('button');
+            b.innerText = p.title;
+            b.onclick = () => show(i);
+            btnContainer.appendChild(b);
+        });
+
+        function show(i) {
+            document.getElementById('title').innerText = data[i].title;
+            document.getElementById('content').innerText = data[i].text;
+            document.getElementById('menu').classList.add('hidden');
+            document.getElementById('poem').classList.remove('hidden');
+        }
+
+        function hide() {
+            document.getElementById('menu').classList.remove('hidden');
+            document.getElementById('poem').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
