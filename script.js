@@ -1,69 +1,85 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const surahSelect = document.getElementById('surah-select');
-    const surahTextContainer = document.getElementById('surah-text');
-    const quranAudio = document.getElementById('quran-audio');
+// 1. مصفوفة المدائح والقصائد (يمكنك زيادة عدد القصائد هنا بسهولة)
+const poemsData = [
+    {
+        id: 1,
+        title: "قمرٌ سيّدنا النّبي قمر",
+        content: `قمرٌ وسيدنا النبى قمرٌ
+        وجَميل وسيدنا النبى وجَميل
+        
+        وكفُّ المُصطفى كالوردِ نادي
+        وعِطرُها يَبْقَى إذا مَسَّتْ أيادي
+        وعَمَّ نَوالُها كُلَّ العِبادِ
+        حبيبُ اللهِ يا خيرَ البَرايا
+        
+        قمرٌ وسيدنا النبى قمرٌ
+        وجَميل وسيدنا النبى وجَميل`
+    },
+    {
+        id: 2,
+        title: "ولد الهدى فالكائنات ضياء",
+        content: `وُلِدَ الهُدى فَالكائِناتُ ضِياءُ
+        وَفَمُ الزَمانِ تَبَسُّمٌ وَثَناءُ
+        
+        الروحُ وَالمَلَأُ المَلائِكُ حَولَهُ
+        لِلدينِ وَالدُنيا بِهِ بُشَراءُ
+        
+        يا خَيرَ مَن جاءَ الوُجودَ تَحِيَّةً
+        مِن مُرسَلينَ لَإِن جَاؤوا بِكَ عُزَراءُ`
+    },
+    {
+        id: 3,
+        title: "برضاك يا خالقي (يا رب بالمصطفى)",
+        content: `يَا رَبِّ بِالْمُصْطَفَى بَلِّغْ مَقَاصِدَنَا
+        وَاغْفِرْ لَنَا مَا مَضَى يَا وَاسِعَ الْكَرَمِ
+        
+        هُوَ الْحَبِيبُ الَّذِي تُرْجَى شَفَاعَتُهُ
+        لِكُلِّ هَوْلٍ مِنَ الْأَهْوَالِ مُقْتَحِمِ
+        
+        مُحَمَّدٌ سَيِّدُ الْكَوْنَيْنِ وَالثَّقَلَيْنِ
+        وَالْفَرِيقَيْنِ مِنْ عُرْبٍ وَمِنْ عَجَمِ`
+    }
+];
 
-    // 1. جلب قائمة السور كلها لكي نضعها في القائمة المنسدلة
-    fetch('https://api.alquran.cloud/v1/surah')
-        .then(response => response.json())
-        .then(data => {
-            const surahs = data.data;
-            surahSelect.innerHTML = '<option value="">-- اختر سورة --</option>';
-            surahs.forEach(surah => {
-                const option = document.createElement('option');
-                option.value = surah.number;
-                option.textContent = `${surah.number}. ${surah.name} (${surah.englishName})`;
-                surahSelect.appendChild(option);
-            });
-        })
-        .catch(err => {
-            surahSelect.innerHTML = '<option>خطأ في تحميل السور</option>';
-            console.error(err);
+// 2. عناصر الواجهة
+const mainScreen = document.getElementById('main-screen');
+const poemScreen = document.getElementById('poem-screen');
+const poemsListContainer = document.getElementById('poems-list-container');
+const poemTitle = document.getElementById('poem-title');
+const poemText = document.getElementById('poem-text');
+const backBtn = document.getElementById('back-btn');
+
+// 3. توليد مصفوفة القصائد في الشاشة الرئيسية
+function loadPoemsList() {
+    poemsListContainer.innerHTML = ''; // تنظيف الحاوية
+    
+    poemsData.forEach(poem => {
+        const item = document.createElement('div');
+        item.classList.add('poem-item');
+        item.textContent = poem.title;
+        
+        // عند الضغط على القصيدة
+        item.addEventListener('click', () => {
+            showPoem(poem);
         });
-
-    // 2. عند تغيير السورة، قم بجلب الآيات والصوت
-    surahSelect.addEventListener('change', (e) => {
-        const surahNumber = e.target.value;
-        if (!surahNumber) return;
-
-        surahTextContainer.innerHTML = '<p class="placeholder-text">جاري تحميل الآيات...</p>';
-
-        // جلب النص (المصحف المكتوب)
-        fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}`)
-            .then(response => response.json())
-            .then(data => {
-                const verses = data.data.ayahs;
-                let surahHTML = '';
-                
-                // إضافة البسملة في البداية إذا لم تكن سورة التوبة، ولتجنب تكرارها في الفاتحة
-                if (surahNumber != 1 && surahNumber != 9) {
-                    surahHTML += `<div style="text-align:center; font-weight:bold; margin-bottom:15px; color:#1e3c72;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>`;
-                }
-
-                verses.forEach(verse => {
-                    // تنظيف النص من البسملة في بداية السور لأننا أضفناها بالأعلى
-                    let text = verse.text;
-                    if (surahNumber != 1 && verse.numberInSurah === 1) {
-                        text = text.replace("بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", "");
-                    }
-                    
-                    surahHTML += `<span class="ayah">${text} <span class="ayah-num">${verse.numberInSurah}</span></span> `;
-                });
-
-                surahTextContainer.innerHTML = surahHTML;
-            });
-
-        // جلب الصوت (بصوت الشيخ مشاري العفاسي كمثال)
-        // ar.alafasy هو المعرف الخاص بالشيخ
-        fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/ar.alafasy`)
-            .then(response => response.json())
-            .then(data => {
-                // سنقوم بتشغيل السورة كاملة كملف صوتي واحد إذا توفر، أو الصوت المجمع
-                // للسهولة، سنربطه برابط صوتي مباشر للسورة من الخادم
-                const formattedNumber = String(surahNumber).padStart(3, '0');
-                quranAudio.src = `https://server8.mp3quran.net/afs/${formattedNumber}.mp3`;
-                quranAudio.play();
-            })
-            .catch(err => console.error('خطأ في جلب الملف الصوتي:', err));
+        
+        poemsListContainer.appendChild(item);
     });
+}
+
+// 4. الانتقال لشاشة القصيدة كاملة
+function showPoem(poem) {
+    poemTitle.textContent = poem.title;
+    poemText.textContent = poem.content;
+    
+    mainScreen.classList.add('hidden');
+    poemScreen.classList.remove('hidden');
+}
+
+// 5. زر العودة للخلف
+backBtn.addEventListener('click', () => {
+    poemScreen.classList.add('hidden');
+    mainScreen.classList.remove('hidden');
 });
+
+// تشغيل الدالة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', loadPoemsList);
