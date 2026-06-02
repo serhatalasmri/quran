@@ -3,49 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برنامج المدائح النبوية</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
+    <title>مدائح المصطفى</title>
     <link rel="stylesheet" href="style.css?v=2">
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-          .then(() => console.log('تم تفعيل خدمة التطبيق!'))
-          .catch(err => console.log('فشل التفعيل:', err));
-      }
-    </script>
 </head>
 <body>
-    <div class="app-container">
-        <div id="main-screen">
-            <header>
-                <h1>مدائح المصطفى ﷺ</h1>
-                <p>مجموعة من أجمل القصائد والمدائح النبوية</p>
-            </header>
-            <main>
-                <div class="poems-list" id="poems-list-container">
-                    </div>
-            </main>
-        </div>
 
-        <div id="poem-screen" class="hidden">
-            <header>
-                <button id="back-btn">← عودة للقائمة</button>
-                <h2 id="poem-title">اسم القصيدة</h2>
-            </header>
-            <main>
-                <div class="poem-content" id="poem-text">
-                    </div>
-            </main>
-        </div>
+    <div id="main-menu" class="container">
+        <h1>مدائح المصطفى ﷺ</h1>
+        <p>مجموعة من أجمل القصائد والمدائح النبوية</p>
+        <button onclick="showPoem('القصيدة الأولى: نهج البردة', 'أمن تذكر جيرانٍ بذي سلمِ...')">نهج البردة</button>
+        <button onclick="showPoem('القصيدة الثانية: البردة', 'مولاي صل وسلم دائماً أبداً...')">البردة</button>
     </div>
 
-    <script src="script.js"></script>
+    <div id="poem-view" class="container hidden">
+        <h2 id="poem-title">اسم القصيدة</h2>
+        <p id="poem-content">نص القصيدة هنا</p>
+        <button onclick="hidePoem()">← عودة للقائمة</button>
+    </div>
+
+    <script src="script.js?v=2"></script>
 </body>
-    <div id="main-menu" class="container">
-    <h1>مدائح المصطفى</h1>
-    <p>مجموعة من أجمل القصائد والمدائح النبوية</p>
-    <button onclick="showPoem('قصيدة 1')">قصيدة البردة</button>
-    <button onclick="showPoem('قصيدة 2')">قصيدة نهج البردة</button>
-</div>
 </html>
