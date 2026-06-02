@@ -3,165 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موسوعة المدائح النبوية الشريفة - الإصدار الكامل</title>
+    <title>مدائح المصطفى ﷺ</title>
     <style>
-        /* =========================================================================
-           القسم الأول: التنسيق الجمالي (CSS) - قمت بتفصيله لزيادة عدد السطور
-           ========================================================================= */
-        :root {
-            --gold: #f59e0b;
-            --dark-bg: #0c1421;
-            --card-bg: #1e293b;
-            --text-color: #e2e8f0;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 600px;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
-
-        h1 { color: var(--gold); text-align: center; font-size: 2.2rem; }
-
-        .btn-style {
-            width: 100%;
-            padding: 20px;
-            margin: 12px 0;
-            border: none;
-            border-radius: 15px;
-            background: #334155;
-            color: white;
-            font-size: 1.1rem;
-            cursor: pointer;
-            border: 1px solid #475569;
-            transition: all 0.3s ease;
-        }
-
-        .btn-style:hover {
-            background: var(--gold);
-            color: black;
-            transform: scale(1.02);
-        }
-
-        .poem-content {
-            font-size: 1.4rem;
-            line-height: 2.8;
-            text-align: center;
-            padding: 30px;
-        }
-
+        body { background-color: #0c1421; color: #fff; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .app { width: 100%; max-width: 450px; background: #1e293b; padding: 25px; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        h1 { color: #f59e0b; margin-bottom: 20px; }
+        button { display: block; width: 100%; padding: 18px; margin: 12px 0; border: none; border-radius: 12px; background: #334155; color: white; font-weight: bold; cursor: pointer; border: 1px solid #475569; }
+        button:hover { background: #f59e0b; color: #000; }
+        .poem-text { font-size: 1.3rem; line-height: 2.2; margin: 20px 0; color: #e2e8f0; }
         .hidden { display: none; }
-        
-        /* إضافة تفاصيل تنسيقية لإطالة الكود */
-        .footer-info { text-align: center; color: #64748b; margin-top: 50px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
-
-    <div class="app-container">
-        <div id="home-view">
+    <div class="app">
+        <div id="home">
             <h1>مدائح المصطفى ﷺ</h1>
-            <div id="list-area"></div>
+            <div id="list"></div>
         </div>
-
-        <div id="poem-view" class="hidden">
-            <h2 id="title-display" style="color: var(--gold); text-align: center;"></h2>
-            <div id="content-display" class="poem-content"></div>
-            <button class="btn-style" onclick="hidePoem()">العودة للمكتبة الرئيسية</button>
+        <div id="view" class="hidden">
+            <h2 id="title" style="color: #f59e0b;"></h2>
+            <div id="content" class="poem-text"></div>
+            <button onclick="goHome()">← العودة للقائمة</button>
         </div>
-        
-        <div class="footer-info">نسخة الموسوعة الشاملة - 2026</div>
     </div>
 
     <script>
-        /* =========================================================================
-           القسم الثاني: قاعدة البيانات (Data Structure)
-           هنا نقوم بتعريف القصائد بشكل موسع جداً لإطالة الكود
-           ========================================================================= */
-        const library = [
-            { id: 1, title: "البردة الشريفة", text: "مولاي صلِّ وسلم دائماً أبداً... على حبيبك خير الخلق كلهمُ...\nأمن تذكر جيران بذي سلم... مزجت دمعا جرى من مقلة بدم." },
-            { id: 2, title: "نهج البردة", text: "ريمٌ على القاعِ بين البانِ والعلمِ... أحلَّ سفكَ دمي في الأشهرِ الحُرُمِ.\nيا ساكنَ القاعِ أدرك ساكنَ الأجَمِ." },
-            { id: 3, title: "يا إمام الرسل", text: "يا إمامَ الرسلِ يا سندي... أنت بعد الله معتمدي.\nيا غياثَ الخلقِ أجمعهم... يا ركابَ الحقِ في الأمدِ." },
-            { id: 4, title: "قصيدة الهمزية", text: "كيف ترقى رقيك الأنبياء... يا سماء ما طاولتها سماء." },
-            { id: 5, title: "أريتَ المحبين", text: "أريتَ المحبين كيف يبكون... من لوعةِ الشوقِ لا ينامون." },
-            { id: 6, title: "يا رسول الله", text: "يا رسول الله يا نبع الحنان... يا ضياءً قد أضاء كل مكان." },
-            { id: 7, title: "طالع البدر علينا", text: "طالع البدر علينا... من ثنيات الوداع." },
-            { id: 8, title: "قمرٌ سيدنا النبي", text: "قمرٌ قمرٌ قمرٌ سيدنا النبي... وجميلٌ وجميلٌ وجميلٌ سيدنا النبي." },
-            { id: 9, title: "نورٌ على نور", text: "نورٌ على نورِ المختارِ نوره... فاق الجمال وجمّت كلّ أطواره." },
-            { id: 10, title: "في مدح الحبيب", text: "في مدح الحبيبِ تذوب القلوب... وتنجلي الهموم وتغفر الذنوب." }
-            /* =========================================================================
-               ملاحظة: يمكنك تكرار هذه السطور 20 مرة إضافية لملء الملف بـ 500+ سطر
-               ========================================================================= */
+        const data = [
+            { t: "البردة الشريفة", c: "مولاي صلِّ وسلم دائماً أبداً..." },
+            { t: "نهج البردة", c: "ريمٌ على القاعِ بين البانِ والعلمِ..." },
+            { t: "يا إمام الرسل", c: "يا إمامَ الرسلِ يا سندي..." },
+            { t: "قصيدة الهمزية", c: "كيف ترقى رقيك الأنبياء..." },
+            { t: "أريت المحبين", c: "أريتَ المحبين كيف يبكون..." },
+            { t: "يا رسول الله", c: "يا رسول الله يا نبع الحنان..." },
+            { t: "قمر سيدنا النبي", c: "قمرٌ قمرٌ قمرٌ سيدنا النبي..." },
+            { t: "في مدح الحبيب", c: "في مدح الحبيبِ تذوب القلوب..." }
         ];
-
-        /* =========================================================================
-           القسم الثالث: المنطق البرمجي (Program Logic)
-           تعليقات وتفصيل لكل وظيفة لزيادة احترافية الكود وطوله
-           ========================================================================= */
         
-        // وظيفة تهيئة التطبيق عند البدء
-        function initializeApp() {
-            const container = document.getElementById('list-container');
-            
-            // إنشاء الأزرار لكل قصيدة في المصفوفة
-            library.forEach(poem => {
-                const button = document.createElement('button');
-                button.className = 'btn-style';
-                button.innerText = poem.title;
-                // إضافة حدث الضغط
-                button.onclick = function() {
-                    displayPoem(poem.id);
-                };
-                container.appendChild(button);
-            });
+        const list = document.getElementById('list');
+        data.forEach((p, i) => {
+            let b = document.createElement('button');
+            b.innerText = p.t;
+            b.onclick = () => {
+                document.getElementById('title').innerText = p.t;
+                document.getElementById('content').innerText = p.c;
+                document.getElementById('home').classList.add('hidden');
+                document.getElementById('view').classList.remove('hidden');
+            };
+            list.appendChild(b);
+        });
+
+        function goHome() {
+            document.getElementById('home').classList.remove('hidden');
+            document.getElementById('view').classList.add('hidden');
         }
-
-        // وظيفة عرض القصيدة المختارة
-        function displayPoem(id) {
-            const poem = library.find(p => p.id === id);
-            if (poem) {
-                document.getElementById('title-display').innerText = poem.title;
-                document.getElementById('content-display').innerText = poem.text;
-                
-                // التبديل بين الشاشات
-                document.getElementById('home-view').classList.add('hidden');
-                document.getElementById('poem-view').classList.remove('hidden');
-                
-                // سكرول لأعلى الصفحة
-                window.scrollTo(0, 0);
-            }
-        }
-
-        // وظيفة العودة للقائمة الرئيسية
-        function hidePoem() {
-            document.getElementById('poem-view').classList.add('hidden');
-            document.getElementById('home-view').classList.remove('hidden');
-        }
-
-        // استدعاء الوظيفة للبدء
-        initializeApp();
-
-        /*
-           نهاية الكود:
-           لقد تم تنظيم الكود بتقسيمات برمجية (Sections) واضحة.
-           هذا النوع من التنظيم يستخدمه المبرمجون المحترفون
-           لضمان سهولة التعديل مستقبلاً.
-           يمكنك إضافة قصائد إضافية في قسم "قاعدة البيانات"
-           وستقوم الدالة initializeApp بترتيبها تلقائياً.
-        */
     </script>
 </body>
 </html>
