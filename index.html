@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مدائح المصطفى ﷺ</title>
     <style>
-        body { background-color: #0c1421; color: #fff; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .app { width: 100%; max-width: 450px; background: #1e293b; padding: 25px; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        body { background: #0c1421; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .app { width: 90%; max-width: 400px; background: #1e293b; padding: 25px; border-radius: 20px; text-align: center; }
         h1 { color: #f59e0b; margin-bottom: 20px; }
-        button { display: block; width: 100%; padding: 18px; margin: 12px 0; border: none; border-radius: 12px; background: #334155; color: white; font-weight: bold; cursor: pointer; border: 1px solid #475569; }
+        button { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 10px; background: #334155; color: white; cursor: pointer; font-size: 16px; }
         button:hover { background: #f59e0b; color: #000; }
-        .poem-text { font-size: 1.3rem; line-height: 2.2; margin: 20px 0; color: #e2e8f0; }
         .hidden { display: none; }
+        .poem-text { color: #e2e8f0; font-size: 1.2rem; line-height: 2; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -26,19 +26,12 @@
             <button onclick="goHome()">← العودة للقائمة</button>
         </div>
     </div>
-
     <script>
         const data = [
-            { t: "البردة الشريفة", c: "مولاي صلِّ وسلم دائماً أبداً..." },
-            { t: "نهج البردة", c: "ريمٌ على القاعِ بين البانِ والعلمِ..." },
-            { t: "يا إمام الرسل", c: "يا إمامَ الرسلِ يا سندي..." },
-            { t: "قصيدة الهمزية", c: "كيف ترقى رقيك الأنبياء..." },
-            { t: "أريت المحبين", c: "أريتَ المحبين كيف يبكون..." },
-            { t: "يا رسول الله", c: "يا رسول الله يا نبع الحنان..." },
-            { t: "قمر سيدنا النبي", c: "قمرٌ قمرٌ قمرٌ سيدنا النبي..." },
-            { t: "في مدح الحبيب", c: "في مدح الحبيبِ تذوب القلوب..." }
+            { t: "البردة الشريفة", c: "مولاي صلِّ وسلم دائماً أبداً... على حبيبك خير الخلق كلهمُ" },
+            { t: "نهج البردة", c: "ريمٌ على القاعِ بين البانِ والعلمِ... أحلَّ سفكَ دمي في الأشهرِ الحُرُمِ" },
+            { t: "يا إمام الرسل", c: "يا إمامَ الرسلِ يا سندي... أنت بعد الله معتمدي" }
         ];
-        
         const list = document.getElementById('list');
         data.forEach((p, i) => {
             let b = document.createElement('button');
@@ -51,7 +44,6 @@
             };
             list.appendChild(b);
         });
-
         function goHome() {
             document.getElementById('home').classList.remove('hidden');
             document.getElementById('view').classList.add('hidden');
